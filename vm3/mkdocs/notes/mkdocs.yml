@@ -1,0 +1,65 @@
+site_name: Notes
+site_url: !!python/object/apply:os.getenv ["MKD_DOMAIN"]
+
+theme:
+    name: material
+    locale: en
+    custom_dir: overrides
+    features:
+      - navigation.tracking
+      - navigation.top
+      - search.suggest
+      - search.highlight
+      - search.suggest
+      - search.highlight
+      - content.code.copy
+      - content.tooltips
+    palette:
+      - scheme: default
+        toggle:
+          icon: material/toggle-switch-off-outline
+          name: Switch to dark mode
+      - scheme: slate
+        toggle:
+          icon: material/toggle-switch
+          name: Switch to light mode
+          primary: green
+          accent: ambe
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 4
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.details
+  - pymdownx.snippets
+  - def_list
+  - attr_list
+  - md_in_html
+  - admonition
+
+extra_css:
+  - css/extra.css
+  - css/prism.css
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
+
+extra_javascript:
+  - js/prism.js
+  - js/katex.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js

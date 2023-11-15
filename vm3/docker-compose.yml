@@ -1,0 +1,38 @@
+version: "3"
+
+volumes:
+  vnextcloud:
+  vdb:
+
+services:
+  db:
+    image: mariadb
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_RPWD}
+      - MYSQL_PASSWORD=${DB_PWD}
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=${DB_USER}
+    volumes:
+      - vdb:/var/lib/mysql
+
+  app:
+    image: nextcloud
+    restart: unless-stopped
+    environment:
+      - MYSQL_PASSWORD=${DB_PWD}
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_HOST=db
+    volumes:
+      - vnextcloud:/var/www/html
+    links:
+      - db
+    ports:
+      - 80:80
+
+
+  nextcloud-tunnel:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${NC_CF_TOKEN}

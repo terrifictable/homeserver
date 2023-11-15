@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+  drone:
+    image: drone/drone:2
+    restart: always
+    container_name: drone_ci
+    environment:
+      - DRONE_GITEA_SERVER=http://${GITEA_DOMAIN}
+      - DRONE_GITEA_CLIENT_ID=${DRONE_GITEA_CID}
+      - DRONE_GITEA_CLIENT_SECRET=${DRONE_GITEA_CS}
+      - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
+      - DRONE_SERVER_HOST=${DRONE_SERVER_HOST}
+      - DRONE_SERVER_PROTO=http
+      - DRONE_OIDC_PKCE=true
+    volumes:
+      - ./drone:/data
+    networks:
+      - public
+    ports:
+      - 80:80
+
+  docker-runner:
+    image: drone/drone-runner-docker:latest
+    container_name: docker_runner
+    restart: always
+    environment:
+      - DRONE_RPC_PROTO=http
+      - DRONE_RPC_HOST=${DRONE_RPC_HOST}
+      - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
+      - DRONE_RUNNER_NAME=docker-runner
+      - DRONE_RUNNER_NETWORKS=public
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - public
+    depends_on:
+      drone:
+        condition: service_started
+
+networks:
+  public:
+    name: public

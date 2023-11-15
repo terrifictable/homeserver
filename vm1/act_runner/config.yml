@@ -1,0 +1,30 @@
+log:
+  level: info
+
+runner:
+  file: .runner
+  capacity: 10
+  env_file: .env
+  timeout: 3h
+  insecure: false
+  fetch_timeout: 5s
+  fetch_interval: 2s
+  labels: []
+
+cache:
+  enabled: true
+  dir: ""
+  host: "${HOST}"
+  port: 8088
+  external_server: ""
+
+container:
+  network: ""
+  privileged: false
+  options:
+  workdir_parent:
+  valid_volumes: []
+  docker_host: ""
+
+host:
+  workdir_parent:

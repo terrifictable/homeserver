@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  act:
+    image: gitea/act_runner:nightly
+    container_name: act_runner
+    restart: unless-stopped
+    environment:
+      - GITEA_INSTANCE_URL=http://${GITEA_DOMAIN}/
+      - GITEA_RUNNER_REGISTRATION_TOKEN=${GITEA_RR_TOKEN}
+      - CONFIG_FILE=/config.yaml
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config.yaml:/config.yaml
+      - ./data:/data
+    ports:
+      - 8088:8088
