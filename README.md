@@ -7,7 +7,7 @@ My Homeserver setup, mainly docker-compose files and small scripts
 | Device            | Usage                          | OS         | CPU                                                     | RAM  | Swap | Drive | PSU  |
 |-------------------|--------------------------------|------------|---------------------------------------------------------|------|------|-------|------|
 | Raspberry Pi 3B+  | Testing code                   | -          | Default                                                 | 1GB  | 1GB  | 64GB  | -    |
-| Old PC            | deploying code and running VMs | Proxmox VE | 4 x Intel(R) Core(TM) i5-6600K CPU @ 3.50GHz (1 Socket) | 16GB | 16GB | 8TB   | 500W |
+| Old PC            | deploying code and running VMs | Proxmox VE | 4 x Intel(R) Core(TM) i5-6600K CPU @ 3.50GHz (1 Socket) | 16GB | 128GB | 8TB   | 500W |
 
 ## Software
 
